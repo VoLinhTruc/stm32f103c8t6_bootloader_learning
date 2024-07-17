@@ -92,12 +92,22 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  static uint8_t blink_count = 0;
   while (1)
-  {
+  {	  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+  	  HAL_Delay(500);
+      HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET);
+      HAL_Delay(500);
+
+	  if(blink_count++ > 3)
+	  {
+		  break;
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
+  HAL_NVIC_SystemReset();
   /* USER CODE END 3 */
 }
 
